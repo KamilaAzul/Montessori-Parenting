@@ -7,6 +7,7 @@ from django.urls import reverse
 
 
 STATUS = ((0, "Draft"), (1, "Published"))
+User = get_user_model()
 
 
 class Post(models.Model):
@@ -20,9 +21,9 @@ class Post(models.Model):
         User, on_delete=models.CASCADE, related_name="blog_posts"
     )
     updated_on = models.DateTimeField(auto_now=True)
+    created_on = models.DateTimeField(auto_now_add=True)
     content = models.TextField()
     excerpt = models.TextField(blank=True)
-    created_on = models.DateTimeField(auto_now_add=True)
     featured_image = CloudinaryField("image", default="placeholder")
     status = models.IntegerField(choices=STATUS, default=0)
     likes = models.ManyToManyField(
@@ -48,9 +49,9 @@ class Comment(models.Model):
                              related_name="comments")
     name = models.CharField(max_length=100)
     email = models.EmailField()
+    approved = models.BooleanField(default=False)
     body = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True)
-    approved = models.BooleanField(default=False)
     created_on = models.DateTimeField(auto_now_add=True)
     
     class Meta:
@@ -65,9 +66,21 @@ class Author(models.Model):
     Model for author
     """
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    timestamp = models.DateTimeField(auto_now_add=True)
     author_picture = CloudinaryField('image', default='placeholder')
+    timestamp = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.user.username
+ 
 
+class Category(models.Model):
+    """
+    Model for category
+    """
+    class Meta:
+        verbose_name_plural = 'Categories'
+    title = models.CharField(max_length=20)
+    category_image = CloudinaryField('image', default='placeholder')
+
+    def __str__(self):
+        return self.title
