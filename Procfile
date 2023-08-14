@@ -1,1 +1,1 @@
-web: gunicorn montessori.wsgi
+web: gunicorn montessori-parenting.wsgi
