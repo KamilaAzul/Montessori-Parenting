@@ -32,7 +32,8 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['montessori-parenting-ed9d8dded804.herokuapp.com', 'localhost', '8000-kamilaazul-montessori-pa-iwy5q49hd5.us2.codeanyapp.com']
+ALLOWED_HOSTS = ['montessori-parenting-ed9d8dded804.herokuapp.com', 'localhost', 
+                 '8000-kamilaazul-montessori-pa-spls6drj5z.us2.codeanyapp.com']
 
 # Application definition
 
